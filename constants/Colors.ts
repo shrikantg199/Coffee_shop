@@ -3,10 +3,8 @@
  * There are many other ways to style your app. For example, [Nativewind](https://www.nativewind.dev/), [Tamagui](https://tamagui.dev/), [unistyles](https://reactnativeunistyles.vercel.app), etc.
  */
 
-
-
 export const Colors = {
   primary: "#D17842",
-  gray: "#0C1015",
+  gray: "#0C1014",
   white: "#FFFFFF",
 };

@@ -5,21 +5,26 @@ import {
   TouchableOpacity,
   Image,
   TextInput,
+  ScrollView,
 } from "react-native";
 import React from "react";
 import { useUser } from "@clerk/clerk-expo";
 import { Colors } from "../../constants/Colors";
 import CategoryList from "../../components/home/CategoryMenuList";
 import CategoryItems from "../../components/home/CategoryItems";
+import CoffeeBeans from "../../components/home/CoffeeBeans";
 const home = () => {
   const { user } = useUser();
   console.log(user.primaryEmailAddress.emailAddress);
   return (
-    <View style={{ backgroundColor: "#303134", flex: 1 }}>
+    <ScrollView
+      showsVerticalScrollIndicator={false}
+      style={{ backgroundColor: Colors.gray, flex: 1 }}
+    >
       <View
         style={{
+          marginHorizontal: 20,
           marginTop: 60,
-          margin: 30,
           display: "flex",
           flexDirection: "row",
           justifyContent: "space-between",
@@ -39,18 +44,18 @@ const home = () => {
           />
         </TouchableOpacity>
       </View>
-      <View style={{ width: 300, margin: 30, marginHorizontal: 30 }}>
-        <Text style={{ color: Colors.white, fontSize: 35, fontWeight: 700 }}>
+      <View style={{ width: 250, marginHorizontal: 30 }}>
+        <Text style={{ color: Colors.white, fontSize: 40, fontWeight: 700 }}>
           Find the best coffee for you
         </Text>
         <TextInput
           placeholder="coffee"
           style={{
-            backgroundColor: "#252A32",
+            backgroundColor: Colors.white,
             paddingHorizontal: 12,
             width: 320,
             color: Colors.white,
-            paddingVertical: 12,
+            paddingVertical: 6,
             marginVertical: 10,
             marginHorizontal: 10,
             borderRadius: 12,
@@ -58,8 +63,9 @@ const home = () => {
         />
         <CategoryList />
         <CategoryItems />
+        <CoffeeBeans />
       </View>
-    </View>
+    </ScrollView>
   );
 };
 

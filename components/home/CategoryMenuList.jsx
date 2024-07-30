@@ -23,6 +23,7 @@ const CategoryList = () => {
       <FlatList
         horizontal={true}
         data={categories}
+        showsVerticalScrollIndicator={false}
         renderItem={({ item }) => (
           <TouchableOpacity
             style={{ marginHorizontal: 10 }}
@@ -31,7 +32,7 @@ const CategoryList = () => {
             <Text
               style={{
                 fontSize: 18,
-                fontWeight:500,
+                fontWeight: 500,
                 color:
                   item.name === selectedCategory ? "#D17842" : Colors.white,
               }}

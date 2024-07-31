@@ -1,28 +1,36 @@
-import React, { useState } from "react";
 import {
   StyleSheet,
   Text,
   View,
   FlatList,
   TouchableOpacity,
-  Alert,
   ToastAndroid,
 } from "react-native";
+import React, { useState } from "react";
 import { Colors } from "../../constants/Colors";
-import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
+import {
+  addDoc,
+  arrayUnion,
+  collection,
+  doc,
+  getDocs,
+  query,
+  updateDoc,
+  where,
+} from "firebase/firestore";
 import { db } from "../../models/firebaseConnect";
-import { useAuth, useUser } from "@clerk/clerk-expo";
+import { useUser } from "@clerk/clerk-expo";
 
 const About = ({ coffeeItems }) => {
-  const size = [{ size: "S" }, { size: "M" }, { size: "L" }];
-  const [selectedSize, setSelectedSize] = useState(size[0].size);
+  const size = [{ Gram: "250" }, { Gram: "500" }, { Gram: "1000" }];
+  const [selected, setSelected] = useState(size[0].Gram);
   const { user } = useUser();
   const addToCart = async () => {
     try {
       const cartQuery = query(
         collection(db, "carts"),
         where("item", "==", coffeeItems?.item),
-        where("size", "==", selectedSize),
+        where("size", "==", selected),
         where("email", "==", user.primaryEmailAddress?.emailAddress)
       );
       const querySnapshot = await getDocs(cartQuery);
@@ -32,7 +40,7 @@ const About = ({ coffeeItems }) => {
         await addDoc(collection(db, "carts"), {
           item: coffeeItems?.item,
           price: coffeeItems?.price,
-          size: selectedSize,
+          size: selected,
           email: user.primaryEmailAddress?.emailAddress,
           quantity: 1,
         });
@@ -40,10 +48,12 @@ const About = ({ coffeeItems }) => {
       }
     } catch (error) {
       console.error("Error adding document: ", error);
-      Alert.alert("Error", `Failed to add item to cart: ${error.message}`);
+      ToastAndroid.show(
+        `Failed to add item to cart: ${coffeeItems?.item}`,
+        ToastAndroid.BOTTOM
+      );
     }
   };
-
   return (
     <View style={styles.container}>
       <View style={styles.descriptionContainer}>
@@ -55,31 +65,65 @@ const About = ({ coffeeItems }) => {
           <Text style={styles.sizeTitle}>Size</Text>
           <FlatList
             data={size}
-            keyExtractor={(item) => item.size}
             horizontal
             contentContainerStyle={styles.sizeList}
-            renderItem={({ item }) => (
-              <TouchableOpacity
-                style={[
-                  styles.sizeItem,
-                  selectedSize === item.size && styles.selectedSizeItem,
-                ]}
-                onPress={() => setSelectedSize(item.size)}
-              >
-                <Text style={styles.sizeText}>{item.size}</Text>
-              </TouchableOpacity>
+            renderItem={({ item, index }) => (
+              <View key={index} style={styles.sizeItem}>
+                <TouchableOpacity
+                  style={[
+                    styles.sizeItem,
+                    selected === item?.Gram && styles.selectedSizeItem,
+                  ]}
+                  onPress={() => setSelected(item?.Gram)}
+                >
+                  <Text style={styles.sizeText}>{item.Gram}gm</Text>
+                </TouchableOpacity>
+              </View>
             )}
           />
-          <View style={styles.footer}>
-            <View style={styles.priceContainer}>
-              <Text style={styles.priceLabel}>Price</Text>
-              <Text style={styles.priceValue}>
+          <View
+            style={{
+              paddingVertical: 40,
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+              width: "100%",
+              alignItems: "center",
+              marginTop: 10,
+              marginHorizontal: 4,
+            }}
+          >
+            <View
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Text style={{ color: Colors.white }}>Price</Text>
+              <Text
+                style={{ color: Colors.white, fontSize: 20, fontWeight: 600 }}
+              >
                 <Text style={{ color: Colors.primary }}>₹</Text>{" "}
                 {coffeeItems?.price}
               </Text>
             </View>
             <TouchableOpacity onPress={addToCart}>
-              <Text style={styles.addToCartButton}>Add to Cart</Text>
+              <Text
+                style={{
+                  backgroundColor: Colors.primary,
+                  width: 250,
+                  textAlign: "center",
+                  padding: 20,
+                  borderRadius: 24,
+                  color: Colors.white,
+                  fontWeight: 600,
+                  fontSize: 18,
+                }}
+              >
+                Add to Cart
+              </Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -122,50 +166,27 @@ const styles = StyleSheet.create({
   },
   sizeItem: {
     backgroundColor: Colors.white,
-
-    padding: 8,
-    width: 60,
+    padding: 10,
+    width: 75,
+    justifyContent: "center",
     alignItems: "center",
     borderRadius: 10,
-  },
-  selectedSizeItem: {
-    backgroundColor: Colors.primary,
-    color: Colors.white,
   },
   sizeText: {
     color: Colors.black,
   },
-  footer: {
-    paddingVertical: 40,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    width: "100%",
-    alignItems: "center",
-    marginTop: 40,
-    marginHorizontal: 4,
-  },
-  priceContainer: {
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  priceLabel: {
-    color: Colors.white,
-  },
-  priceValue: {
-    color: Colors.white,
-    fontSize: 20,
-    fontWeight: "600",
-  },
-  addToCartButton: {
+  selectedSizeItem: {
     backgroundColor: Colors.primary,
-    width: 250,
-    textAlign: "center",
-    padding: 20,
-    borderRadius: 24,
     color: Colors.white,
-    fontWeight: "600",
-    fontSize: 18,
+    
+  },
+  sizeItem: {
+    backgroundColor: Colors.white,
+    width: 60,
+    height: 40,
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 10,
   },
 });
 

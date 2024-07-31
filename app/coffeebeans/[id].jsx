@@ -1,10 +1,11 @@
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import React, { useEffect, useState } from "react";
-import Intro from "../../components/Coffee/Intro";
+
 import { useLocalSearchParams } from "expo-router";
 import { db } from "../../models/firebaseConnect";
 import { doc, getDoc } from "firebase/firestore";
-import About from "../../components/Coffee/About";
+import Intro from "../../components/coffeebeans/Intro";
+import About from "../../components/coffeebeans/About";
 
 const CoffeeBeans = () => {
   const [coffeeItems, setCoffeeItems] = useState();

@@ -4,7 +4,7 @@ import { getAnalytics } from "firebase/analytics";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 const firebaseConfig = {
-  apiKey: process.env.API_KEY,
+  apiKey:process.env.API_KEY,
   authDomain: "coffee-shop-619db.firebaseapp.com",
   projectId: "coffee-shop-619db",
   storageBucket: "coffee-shop-619db.appspot.com",

@@ -27,6 +27,7 @@ const CoffeeList = () => {
       <Intro coffeeItems={coffeeItems} />
       {/* about */}
       <About coffeeItems={coffeeItems} />
+      
     </ScrollView>
   );
 };

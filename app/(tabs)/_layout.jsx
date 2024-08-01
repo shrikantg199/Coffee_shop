@@ -38,7 +38,7 @@ const _layout = () => {
         }}
       />
       <Tabs.Screen
-        name="favorites"
+        name="FavoritesList"
         options={{
           headerShown: false,
           tabBarActiveTintColor: Colors.primary,

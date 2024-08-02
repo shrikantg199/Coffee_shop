@@ -13,9 +13,11 @@ import { Colors } from "../../constants/Colors";
 import CategoryList from "../../components/home/CategoryMenuList";
 import CategoryItems from "../../components/home/CategoryItems";
 import CoffeeBeans from "../../components/home/CoffeeBeans";
+import { useNavigation } from "expo-router";
 const home = () => {
   const { user } = useUser();
   console.log(user.primaryEmailAddress.emailAddress);
+  const navigation = useNavigation();
   return (
     <ScrollView
       showsVerticalScrollIndicator={false}
@@ -37,7 +39,7 @@ const home = () => {
             style={{ width: 33, height: 33 }}
           />
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate("profile")}>
           <Image
             source={{ uri: user.imageUrl }}
             style={{ width: 40, height: 40, borderRadius: 12 }}

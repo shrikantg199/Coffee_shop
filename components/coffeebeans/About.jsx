@@ -22,7 +22,7 @@ import { db } from "../../models/firebaseConnect";
 import { useUser } from "@clerk/clerk-expo";
 
 const About = ({ coffeeItems }) => {
-  const size = [{ Gram: "250" }, { Gram: "500" }, { Gram: "1000" }];
+  const size = [{ Gram: "250 gm" }, { Gram: "500 gm" }, { Gram: "1000 gm" }];
   const [selected, setSelected] = useState(size[0].Gram);
   const { user } = useUser();
   const addToCart = async () => {
@@ -43,6 +43,8 @@ const About = ({ coffeeItems }) => {
           size: selected,
           email: user.primaryEmailAddress?.emailAddress,
           quantity: 1,
+          imageUrl: coffeeItems.imageUrl,
+          description: coffeeItems.description,
         });
         ToastAndroid.show("Item added to cart", ToastAndroid.BOTTOM);
       }
@@ -76,7 +78,7 @@ const About = ({ coffeeItems }) => {
                   ]}
                   onPress={() => setSelected(item?.Gram)}
                 >
-                  <Text style={styles.sizeText}>{item.Gram}gm</Text>
+                  <Text style={styles.sizeText}>{item.Gram}</Text>
                 </TouchableOpacity>
               </View>
             )}
@@ -178,7 +180,6 @@ const styles = StyleSheet.create({
   selectedSizeItem: {
     backgroundColor: Colors.primary,
     color: Colors.white,
-    
   },
   sizeItem: {
     backgroundColor: Colors.white,

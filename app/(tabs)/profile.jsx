@@ -8,7 +8,9 @@ const profile = () => {
   return (
     <View style={{ backgroundColor: Colors.gray, flex: 1, padding: 80 }}>
       <TouchableOpacity>
-        <Text onPress={() => signOut()}>profile</Text>
+        <Text style={{ color: Colors.white }} onPress={() => signOut()}>
+          profile
+        </Text>
       </TouchableOpacity>
     </View>
   );

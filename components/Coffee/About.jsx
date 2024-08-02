@@ -35,6 +35,8 @@ const About = ({ coffeeItems }) => {
           size: selectedSize,
           email: user.primaryEmailAddress?.emailAddress,
           quantity: 1,
+          imageUrl: coffeeItems?.imageUrl,
+          description: coffeeItems.description,
         });
         ToastAndroid.show("Item added to cart", ToastAndroid.BOTTOM);
       }

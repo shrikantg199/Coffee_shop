@@ -35,7 +35,7 @@ const Favorite = ({ item }) => {
           style={{
             fontSize: 18,
             color: Colors.gray,
-            padding: 3,
+            padding: 6,
             fontWeight: 700,
           }}
         >

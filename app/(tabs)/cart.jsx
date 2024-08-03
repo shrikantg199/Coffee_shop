@@ -3,24 +3,27 @@ import {
   FlatList,
   StyleSheet,
   Text,
+  TouchableOpacity,
   View,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { Colors } from "../../constants/Colors";
-import { collection, getDocs, query, where } from "firebase/firestore";
+import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../../models/firebaseConnect";
 import CartItems from "../../components/cart/CartItems";
 import { useUser } from "@clerk/clerk-expo";
+import { useRouter } from "expo-router";
 
 const Cart = () => {
   const [loading, setLoading] = useState(false);
   const [cartItem, setCartItem] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const { user } = useUser();
+  const router = useRouter();
   useEffect(() => {
     getCartList();
   }, [user]);
-  //console.log(user);
+
   const getCartList = async () => {
     const q = query(
       collection(db, "carts"),
@@ -31,13 +34,24 @@ const Cart = () => {
     const querySnapshot = await getDocs(q);
     let items = [];
     querySnapshot.forEach((doc) => {
-      items.push({ id: doc.id, ...doc.data() });
-      console.log(doc.data());
+      items.push({ id: doc?.id, ...doc.data() });
     });
     setCartItem(items);
-    //console.log(items);
     setLoading(false);
     calculateTotalPrice(items);
+  };
+
+  const handleCODProcess = async () => {
+    const codData = {
+      items: cartItem,
+      user: user.id,
+      total: totalPrice,
+      username: user?.primaryEmailAddress.emailAddress,
+      createdAt: new Date(),
+      paymentMethod: "Cash on Delivery",
+    };
+    await addDoc(collection(db, "codOrders"), codData);
+    router.push("/Order/confirmation");
   };
 
   const calculateTotalPrice = (items) => {
@@ -60,7 +74,6 @@ const Cart = () => {
     <View
       style={{
         backgroundColor: Colors.gray,
-        flex: 1,
         paddingTop: 60,
         justifyContent: "center",
         alignItems: "center",
@@ -86,20 +99,73 @@ const Cart = () => {
           )}
         />
       )}
-      <Text
+
+      <View
         style={{
-          backgroundColor: Colors.primary,
-          paddingHorizontal: 40,
-          paddingVertical: 14,
-          position: "absolute",
-          borderRadius: 20,
-          color: Colors.white,
-          fontSize: 18,
-          bottom: 20,
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center",
+          width: "100%",
+          paddingHorizontal: 20,
+          bottom: 60,
         }}
       >
-        pay ₹{totalPrice.toFixed(2)}
-      </Text>
+        <View
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <Text style={{ color: Colors.white }}>Total Price</Text>
+          <View
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: 4,
+            }}
+          >
+            <Text
+              style={{
+                color: Colors.primary,
+                fontSize: 24,
+                textAlign: "center",
+                fontWeight: 700,
+              }}
+            >
+              ₹
+            </Text>
+            <Text
+              style={{ color: Colors.white, fontWeight: 400, fontSize: 20 }}
+            >
+              {totalPrice.toFixed(2)}
+            </Text>
+          </View>
+        </View>
+
+        <TouchableOpacity
+          style={{
+            backgroundColor: Colors.primary,
+            width: 240,
+            borderRadius: 20,
+            padding: 12,
+          }}
+          onPress={handleCODProcess}
+        >
+          <Text
+            style={{
+              fontSize: 20,
+              color: Colors.white,
+              textAlign: "center",
+            }}
+          >
+            Cash on Delivery
+          </Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };

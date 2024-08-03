@@ -1,10 +1,13 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React, { useEffect, useState } from "react";
 import { Colors } from "../../constants/Colors";
+import { doc, updateDoc } from "firebase/firestore";
+import { db } from "../../models/firebaseConnect";
 
 const CartItems = ({ cartItems, onUpdateQuantity }) => {
   const [count, setCount] = useState(cartItems?.quantity);
   useEffect(() => {
+    updateQuantityInDb(cartItems?.id, count);
     onUpdateQuantity(cartItems?.id, count);
   }, [count]);
   const incrementCount = () => {
@@ -13,6 +16,16 @@ const CartItems = ({ cartItems, onUpdateQuantity }) => {
 
   const decrementCount = () => {
     setCount((prevCount) => (prevCount > 1 ? prevCount - 1 : 1));
+  };
+  const updateQuantityInDb = async (id, quantity) => {
+    try {
+      const itemDoc = doc(db, "carts", id);
+      await updateDoc(itemDoc, {
+        quantity: quantity,
+      });
+    } catch (error) {
+      console.error("Error updating quantity: ", error);
+    }
   };
   const totalPrice = cartItems?.price * count;
   return (

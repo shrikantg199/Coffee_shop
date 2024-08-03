@@ -9,7 +9,7 @@ import About from "../../components/Coffee/About";
 const CoffeeList = () => {
   const [coffeeItems, setCoffeeItems] = useState();
   const { id } = useLocalSearchParams();
-  console.log(id);
+  //console.log(id);
   useEffect(() => {
     getItemList();
   }, []);
@@ -17,7 +17,7 @@ const CoffeeList = () => {
     const docref = doc(db, "Coffee_List", id);
     const docSnap = await getDoc(docref);
     if (docSnap.exists()) {
-      console.log(docSnap.data());
+     // console.log(docSnap.data());
       setCoffeeItems(docSnap.data());
     }
   };

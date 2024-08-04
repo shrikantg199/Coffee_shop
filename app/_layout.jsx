@@ -1,10 +1,8 @@
 import React from "react";
-import { Link, Stack } from "expo-router";
+import { Stack } from "expo-router";
 import { ClerkProvider, SignedIn, SignedOut } from "@clerk/clerk-expo";
 import * as SecureStore from "expo-secure-store";
 import LogInScreen from "../components/LogInScreen";
-import { Colors } from "@/constants/Colors";
-
 const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
 
 const tokenCache = {
@@ -44,6 +42,7 @@ export default function RootLayout() {
           <Stack.Screen name="(tabs)" />
         </Stack>
       </SignedIn>
+
       <SignedOut>
         <LogInScreen />
       </SignedOut>

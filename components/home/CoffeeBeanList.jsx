@@ -3,7 +3,7 @@ import React from "react";
 import { Colors } from "../../constants/Colors";
 import { useRouter } from "expo-router";
 
-const CategoryItemList = ({ category ,rating}) => {
+const CategoryItemList = ({ category }) => {
   const router = useRouter();
   return (
     <TouchableOpacity
@@ -17,24 +17,24 @@ const CategoryItemList = ({ category ,rating}) => {
           justifyContent: "center",
           display: "flex",
           alignItems: "center",
-          height: 110,
+          height: 100,
         }}
       >
         <Image
-          source={{ uri: category.imageUrl }}
+          source={{ uri: category?.imageUrl }}
           style={{
             width: 150,
-            height: 110,
+            height: 100,
             borderTopLeftRadius: 20,
             borderTopRightRadius: 20,
           }}
         />
       </View>
-      <View style={{ marginLeft: 10, marginTop: 20 }}>
-        <Text style={{ color: Colors.white, fontSize: 18 }}>
+      <View style={{ marginLeft: 10, marginTop: 4 }}>
+        <Text style={{ color: Colors.white, fontSize: 16 }}>
           {category.item}
         </Text>
-        <Text style={{ color: Colors.white }}>{category.description}</Text>
+        <Text style={{ color: Colors.white }}>{category?.description}</Text>
         <View
           style={{
             marginVertical: 6,
@@ -62,7 +62,7 @@ const CategoryItemList = ({ category ,rating}) => {
             >
               ₹
             </Text>
-            <Text style={{ color: Colors.white }}>{category.price}</Text>
+            <Text style={{ color: Colors.white }}>{category?.price}</Text>
           </View>
         </View>
       </View>

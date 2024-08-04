@@ -21,7 +21,7 @@ const CategoryItemList = ({ category }) => {
         }}
       >
         <Image
-          source={{ uri: category.imageUrl }}
+          source={{ uri: category?.imageUrl }}
           style={{
             width: 150,
             height: 110,
@@ -30,11 +30,11 @@ const CategoryItemList = ({ category }) => {
           }}
         />
       </View>
-      <View style={{ marginLeft: 10, marginTop: 20 }}>
+      <View style={{ marginLeft: 10, marginTop: 10 }}>
         <Text style={{ color: Colors.white, fontSize: 18 }}>
-          {category.item}
+          {category?.item}
         </Text>
-        <Text style={{ color: Colors.white }}>{category.description}</Text>
+        <Text style={{ color: Colors.white }}>{category?.description}</Text>
         <View
           style={{
             marginVertical: 4,
@@ -52,6 +52,7 @@ const CategoryItemList = ({ category }) => {
               flexDirection: "row",
               justifyContent: "center",
               gap: 4,
+              flex: 1,
             }}
           >
             <Text
@@ -63,7 +64,7 @@ const CategoryItemList = ({ category }) => {
             >
               ₹
             </Text>
-            <Text style={{ color: Colors.white }}>{category.price}</Text>
+            <Text style={{ color: Colors.white }}>{category?.price}</Text>
           </View>
           <View
             style={{
@@ -72,6 +73,7 @@ const CategoryItemList = ({ category }) => {
               alignItems: "center",
               gap: 4,
               marginLeft: 20,
+              flex: 1,
             }}
           >
             <AntDesign name="star" size={20} color={Colors.primary} />

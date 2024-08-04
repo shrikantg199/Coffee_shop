@@ -1,10 +1,17 @@
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+  Image,
+  StyleSheet,
+  Text,
+  ToastAndroid,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import React, { useEffect, useState } from "react";
 import { Colors } from "../../constants/Colors";
-import { doc, updateDoc } from "firebase/firestore";
+import { deleteDoc, doc, updateDoc } from "firebase/firestore";
 import { db } from "../../models/firebaseConnect";
-
-const CartItems = ({ cartItems, onUpdateQuantity }) => {
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+const CartItems = ({ cartItems, onUpdateQuantity, getCartList }) => {
   const [count, setCount] = useState(cartItems?.quantity);
   useEffect(() => {
     updateQuantityInDb(cartItems?.id, count);
@@ -25,6 +32,16 @@ const CartItems = ({ cartItems, onUpdateQuantity }) => {
       });
     } catch (error) {
       console.error("Error updating quantity: ", error);
+    }
+  };
+  const deleteItemFromDb = async (id) => {
+    try {
+      const itemDoc = doc(db, "carts", id);
+      await deleteDoc(itemDoc);
+      getCartList();
+      ToastAndroid.show("item is deleted", ToastAndroid.TOP);
+    } catch (error) {
+      console.error("Error deleting item: ", error);
     }
   };
   const totalPrice = cartItems?.price * count;
@@ -110,12 +127,11 @@ const CartItems = ({ cartItems, onUpdateQuantity }) => {
               <Text
                 style={{
                   backgroundColor: Colors.primary,
-                  paddingHorizontal: 13,
-                  paddingVertical: 7,
+                  padding:10,
                   borderRadius: 8,
                   color: Colors.white,
                   textAlign: "center",
-
+                  flex: 1,
                   fontSize: 14,
                   fontWeight: 900,
                 }}
@@ -129,13 +145,13 @@ const CartItems = ({ cartItems, onUpdateQuantity }) => {
               <Text
                 style={{
                   backgroundColor: Colors.primary,
-                  paddingHorizontal: 13,
-                  paddingVertical: 7,
+                padding:10,
                   borderRadius: 8,
                   color: Colors.white,
                   textAlign: "center",
                   fontSize: 14,
                   fontWeight: 900,
+                  flex: 1,
                 }}
               >
                 +
@@ -143,6 +159,9 @@ const CartItems = ({ cartItems, onUpdateQuantity }) => {
             </TouchableOpacity>
           </View>
         </View>
+        <TouchableOpacity onPress={() => deleteItemFromDb(cartItems?.id)}>
+          <MaterialIcons name="delete-forever" size={28} color="red" />
+        </TouchableOpacity>
       </View>
       <View
         style={{

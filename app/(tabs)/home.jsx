@@ -25,8 +25,8 @@ const home = () => {
     >
       <View
         style={{
-          marginHorizontal: 20,
-          marginTop: 60,
+          marginHorizontal: 10,
+          marginTop: 40,
           display: "flex",
           flexDirection: "row",
           justifyContent: "space-between",
@@ -46,12 +46,14 @@ const home = () => {
           />
         </TouchableOpacity>
       </View>
-      <View style={{ width: 250, marginHorizontal: 30 }}>
-        <Text style={{ color: Colors.white, fontSize: 40, fontWeight: 700 }}>
-          Find the best coffee for you
-        </Text>
+      <View style={{ width: "100%", paddingHorizontal: 10 }}>
+        <View style={{ width: 250 }}>
+          <Text style={{ color: Colors.white, fontSize: 40, fontWeight: 700 }}>
+            Find the best coffee for you
+          </Text>
+        </View>
         <TextInput
-          placeholder="coffee"
+          placeholder="Search Your coffee..."
           style={{
             backgroundColor: Colors.white,
             paddingHorizontal: 12,
@@ -63,7 +65,7 @@ const home = () => {
             borderRadius: 12,
           }}
         />
-        <CategoryList />
+       
         <CategoryItems />
         <CoffeeBeans />
       </View>

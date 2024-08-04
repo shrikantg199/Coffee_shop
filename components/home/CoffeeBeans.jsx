@@ -16,12 +16,18 @@ const CoffeeBeans = () => {
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
       //console.log(doc.data());
-      setCategoryItem((prev) => [...prev, { id: doc?.id, ...doc.data() }]);
+      setCategoryItem((prev) => [...prev, { id: doc?.id, ...doc?.data() }]);
     });
   };
   return (
-    <View>
-      <Text style={{ color: Colors.white, fontSize: 18, marginVertical: 14 }}>
+    <View style={{ marginHorizontal: 20 }}>
+      <Text
+        style={{
+          color: Colors.white,
+          fontSize: 24,
+          marginVertical: 20,
+        }}
+      >
         Coffee Beans
       </Text>
       <View>
@@ -31,12 +37,13 @@ const CoffeeBeans = () => {
           showsHorizontalScrollIndicator={false}
           renderItem={({ item }) => (
             <View
+              key={item?.id}
               style={{
                 backgroundColor: "#0a0f14",
-                height: 220,
+                height: 190,
                 width: 150,
                 borderRadius: 20,
-
+                margin: 8,
                 borderColor: "#808080",
                 borderWidth: 0.6,
               }}

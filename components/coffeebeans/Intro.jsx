@@ -23,10 +23,7 @@ const Intro = ({ coffeeItems }) => {
           }}
         >
           <TouchableOpacity onPress={() => router.back()}>
-            <Ionicons name="arrow-back-circle-sharp" size={40} color="black" />
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Fontisto name="heart" size={25} color="red" />
+            <Ionicons name="arrow-back-circle-sharp" size={40} color="white" />
           </TouchableOpacity>
         </View>
 
@@ -67,7 +64,6 @@ const Intro = ({ coffeeItems }) => {
                 marginLeft: 20,
               }}
             >
-          
               <Text style={{ color: Colors.white }}>{coffeeItems?.rating}</Text>
             </View>
           </View>

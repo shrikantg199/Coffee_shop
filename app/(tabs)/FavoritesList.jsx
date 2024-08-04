@@ -58,9 +58,9 @@ const FavoritesList = () => {
       ) : (
         <FlatList
           data={favorite}
-          horizontal
           onRefresh={getFavoriteList}
           refreshing={loading}
+          numColumns={2}
           renderItem={({ item }) => (
             <TouchableOpacity
               onPress={() => getFavoriteCategory(item.name)}
@@ -72,6 +72,8 @@ const FavoritesList = () => {
                 borderColor: Colors.white,
                 borderWidth: 0.5,
                 borderRadius: 20,
+                margin: 14,
+               
               }}
             >
               <Favorite item={item} />

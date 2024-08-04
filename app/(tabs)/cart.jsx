@@ -34,7 +34,7 @@ const Cart = () => {
     const querySnapshot = await getDocs(q);
     let items = [];
     querySnapshot.forEach((doc) => {
-      items.push({ id: doc?.id, ...doc.data() });
+      items.push({ id: doc?.id, ...doc?.data() });
     });
     setCartItem(items);
     setLoading(false);
@@ -74,6 +74,7 @@ const Cart = () => {
     <View
       style={{
         backgroundColor: Colors.gray,
+        height: "100%",
         paddingTop: 60,
         justifyContent: "center",
         alignItems: "center",
@@ -82,90 +83,92 @@ const Cart = () => {
       {loading ? (
         <ActivityIndicator />
       ) : (
-        <FlatList
-          data={cartItem}
-          onRefresh={getCartList}
-          refreshing={loading}
-          renderItem={({ item }) => (
-            <View
-              key={item?.id}
-              style={{ marginHorizontal: 8, marginVertical: 4, padding: 4 }}
-            >
-              <CartItems
-                cartItems={item}
-                onUpdateQuantity={handleUpdateQuantity}
-              />
-            </View>
-          )}
-        />
-      )}
-
-      <View
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "center",
-          width: "100%",
-          paddingHorizontal: 20,
-          bottom: 60,
-        }}
-      >
-        <View
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <Text style={{ color: Colors.white }}>Total Price</Text>
+        <View>
+          <FlatList
+            data={cartItem}
+            onRefresh={getCartList}
+            refreshing={loading}
+            renderItem={({ item }) => (
+              <View
+                key={item?.id}
+                style={{ marginHorizontal: 8, marginVertical: 4, padding: 4 }}
+              >
+                <CartItems
+                  cartItems={item}
+                  onUpdateQuantity={handleUpdateQuantity}
+                  getCartList={getCartList}
+                />
+              </View>
+            )}
+          />
           <View
             style={{
               display: "flex",
               flexDirection: "row",
+              justifyContent: "space-between",
               alignItems: "center",
-              justifyContent: "center",
-              gap: 4,
+              width: "100%",
+              paddingHorizontal: 20,
+              bottom: 20,
             }}
           >
-            <Text
+            <View
               style={{
-                color: Colors.primary,
-                fontSize: 24,
-                textAlign: "center",
-                fontWeight: 700,
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
               }}
             >
-              ₹
-            </Text>
-            <Text
-              style={{ color: Colors.white, fontWeight: 400, fontSize: 20 }}
+              <Text style={{ color: Colors.white }}>Total Price</Text>
+              <View
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: 4,
+                }}
+              >
+                <Text
+                  style={{
+                    color: Colors.primary,
+                    fontSize: 24,
+                    textAlign: "center",
+                    fontWeight: 700,
+                  }}
+                >
+                  ₹
+                </Text>
+                <Text
+                  style={{ color: Colors.white, fontWeight: 400, fontSize: 20 }}
+                >
+                  {totalPrice.toFixed(2)}
+                </Text>
+              </View>
+            </View>
+
+            <TouchableOpacity
+              style={{
+                backgroundColor: Colors.primary,
+                width: 240,
+                borderRadius: 20,
+                padding: 12,
+              }}
+              onPress={handleCODProcess}
             >
-              {totalPrice.toFixed(2)}
-            </Text>
+              <Text
+                style={{
+                  fontSize: 20,
+                  color: Colors.white,
+                  textAlign: "center",
+                }}
+              >
+                Cash on Delivery
+              </Text>
+            </TouchableOpacity>
           </View>
         </View>
-
-        <TouchableOpacity
-          style={{
-            backgroundColor: Colors.primary,
-            width: 240,
-            borderRadius: 20,
-            padding: 12,
-          }}
-          onPress={handleCODProcess}
-        >
-          <Text
-            style={{
-              fontSize: 20,
-              color: Colors.white,
-              textAlign: "center",
-            }}
-          >
-            Cash on Delivery
-          </Text>
-        </TouchableOpacity>
-      </View>
+      )}
     </View>
   );
 };

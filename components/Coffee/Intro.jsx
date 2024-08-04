@@ -12,12 +12,21 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Fontisto from "@expo/vector-icons/Fontisto";
 import { useRouter } from "expo-router";
-import { addDoc, collection, deleteDoc, doc, getDocs, query, where } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  getDocs,
+  query,
+  where,
+} from "firebase/firestore";
 import { db } from "../../models/firebaseConnect";
 import { useUser } from "@clerk/clerk-expo";
 
 const Intro = ({ coffeeItems }) => {
   const [isFavorited, setIsFavorited] = useState(false);
+
   const { user } = useUser();
   const router = useRouter();
 
@@ -130,13 +139,13 @@ const Intro = ({ coffeeItems }) => {
         }}
       >
         <TouchableOpacity onPress={() => router.back()}>
-          <Ionicons name="arrow-back-circle-sharp" size={40} color="black" />
+          <Ionicons name="arrow-back-circle-sharp" size={40} color="white" />
         </TouchableOpacity>
         <TouchableOpacity onPress={handleFavoriteToggle}>
           <Fontisto
             name="heart"
             size={25}
-            color={isFavorited ? "red" : "black"}
+            color={isFavorited ? "red" : "white"}
           />
         </TouchableOpacity>
       </View>

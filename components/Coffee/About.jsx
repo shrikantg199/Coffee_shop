@@ -138,18 +138,20 @@ const styles = StyleSheet.create({
     color: Colors.black,
   },
   footer: {
+    position: "static",
     paddingVertical: 40,
     flexDirection: "row",
     justifyContent: "space-between",
     width: "100%",
     alignItems: "center",
-    marginTop: 40,
+    marginTop: 20,
     marginHorizontal: 4,
   },
   priceContainer: {
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
+    
   },
   priceLabel: {
     color: Colors.white,

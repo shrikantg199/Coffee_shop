@@ -7,7 +7,6 @@ import {
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import CategoryItemList from "./CategoryItemList";
-import { Colors } from "../../constants/Colors";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../../models/firebaseConnect";
 import CategoryList from "./CategoryMenuList";

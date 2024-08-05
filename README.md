@@ -1,50 +1,61 @@
-# Welcome to your Expo app 👋
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+# Coffee Shop App ☕️📱
 
-## Get started
+Welcome to the Coffee Shop App, a React Native application designed to enhance your coffee shopping experience with seamless browsing, secure authentication, and efficient database management.
 
-1. Install dependencies
+<p align="center">
+<img src="assets/screenshot.jpg" alt="coffee shop" width="400" height="900">
+</p>
 
+## Features
+
+### ✅ Authentication
+Users can securely log in and manage their accounts with ease, ensuring a personalized and secure experience.
+
+### 🛒 Add to Cart
+Customers can seamlessly browse and add their favorite coffee blends to the cart for a smooth and enjoyable shopping experience.
+
+### ❤ Favorites
+Save your favorite items for quick access on future visits, making it easier to reorder your beloved coffee blends.
+
+### 🔒 Separate Login Data
+Each user has unique login credentials, ensuring personalized experiences and maintaining security.
+
+### 🌐 Dynamic Routing
+The app’s navigation is dynamic, allowing users to easily explore different sections without any hassle.
+
+### 📊 Firebase Database
+The entire application is backed by Firebase, enabling real-time data syncing, secure storage, and efficient database management.
+
+## Tech Stack
+
+- **React Native:** For building the mobile app.
+- **Firebase:** For real-time database, authentication, and storage.
+- **Expo:** To streamline the development process and provide a smooth development environment.
+
+## Installation
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/shrikantg199/Coffee_shop.git
+   ```
+2. **Navigate to the project directory:**
+   ```bash
+   cd coffeeshop-app
+   ```
+3. **Install dependencies:**
    ```bash
    npm install
    ```
-
-2. Start the app
-
+4. **Start the application:**
    ```bash
-    npx expo start
+   expo start
    ```
 
-In the output, you'll find options to open the app in a
+## Usage
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+- **Login:** Create an account or log in with your existing credentials.
+- **Browse:** Explore different coffee blends and add your favorites to the cart.
+- **Order:** Complete your purchase and enjoy your coffee!
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
 
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.

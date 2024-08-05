@@ -49,7 +49,7 @@ The entire application is backed by Firebase, enabling real-time data syncing, s
    ```
 4. **Start the application:**
    ```bash
-   expo start
+   npx expo start
    ```
 
 ## Usage

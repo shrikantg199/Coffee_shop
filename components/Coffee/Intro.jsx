@@ -139,7 +139,7 @@ const Intro = ({ coffeeItems }) => {
         }}
       >
         <TouchableOpacity onPress={() => router.back()}>
-          <Ionicons name="arrow-back-circle-sharp" size={40} color="white" />
+          <Ionicons name="arrow-back-circle-sharp" size={35} color="white" />
         </TouchableOpacity>
         <TouchableOpacity onPress={handleFavoriteToggle}>
           <Fontisto

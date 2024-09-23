@@ -3,23 +3,25 @@
 
 Welcome to the Coffee Shop App, a React Native application designed to enhance your coffee shopping experience with seamless browsing, secure authentication, and efficient database management.
 
-<p align="center">
-<img src="assets/screenshot.jpg" alt="coffee shop" width="400" height="900">
-</p>
+
+https://github.com/user-attachments/assets/8959a1bb-89a4-475f-b3fc-f1dd289e9a62
+
+
+
+
+
 
 ## Features
 
 ### ✅ Authentication
-Users can securely log in and manage their accounts with ease, ensuring a personalized and secure experience.
 
 ### 🛒 Add to Cart
-Customers can seamlessly browse and add their favorite coffee blends to the cart for a smooth and enjoyable shopping experience.
 
 ### ❤ Favorites
-Save your favorite items for quick access on future visits, making it easier to reorder your beloved coffee blends.
-
 ### 🔒 Separate Login Data
-Each user has unique login credentials, ensuring personalized experiences and maintaining security.
+<p align="center">
+<img src="assets/screenshot.jpg" alt="coffee shop" width="400" height="900">
+</p>
 
 ### 🌐 Dynamic Routing
 The app’s navigation is dynamic, allowing users to easily explore different sections without any hassle.
